@@ -1,4 +1,4 @@
-function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, initial, varargin)
+function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, initial)
 % plGaussFit returns a fit and a gof against the input x and y data, using 
 % the sum of n oscillators defined by plGauss.
 %   Inputs:
@@ -10,6 +10,8 @@ function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, initial, varargin)
 %   Outputs:
 %       myFit: MATLAB fit [various] {cfit}
 %       myGof: MATLAB goodness of fit [various] {struct}
+%       myArea: Trapezoidal integrated area of fits {array}
+%       myGuss: Output of Gaussian function {array}
 %
 %  This function file was written in MATLAB R2013a, and is part of the
 %  project: photoluminescence.
@@ -32,7 +34,8 @@ function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, initial, varargin)
     myFitType=fittype(myEq, 'dependent',{'y'},'independent',{'x'},...
     'coefficients', myCoeff);
 
-    [start,upper,lower]=plGaussFitSetup(x, initial, myCoeff, p.Results.testc, p.Results.testA);
+    [start,upper,lower]=plGaussFitSetup(x, initial, myCoeff, ...
+        p.Results.testc, p.Results.testA);
 
     [myFit,myGof]=fit(x,y,myFitType,'StartPoint', start, 'Upper', upper,...
         'Lower', lower, 'MaxFunEvals', 5000, 'MaxIter', 5000,...

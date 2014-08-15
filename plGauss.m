@@ -3,7 +3,7 @@ function f = plGauss(x, En, c, A)
 %   Inputs:
 %        x: Energy [eV] {vector expected}
 %       En: Oscillator energy [eV] {scalar expected}
-%        c: Standard deviation [eV] {scalar expected}
+%        c: Standard deviation (HWHM) [eV] {scalar expected}
 %        A: Amplitude factor [unitless] {scalar expected}
 %   Outputs:
 %        f: Gaussian [arb.] {vector}
