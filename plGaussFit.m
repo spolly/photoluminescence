@@ -11,7 +11,7 @@ function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, initial)
 %       myFit: MATLAB fit [various] {cfit}
 %       myGof: MATLAB goodness of fit [various] {struct}
 %       myArea: Trapezoidal integrated area of fits {array}
-%       myGuss: Output of Gaussian function {array}
+%       myGauss: Output of Gaussian function {array}
 %
 %  This function file was written in MATLAB R2013a, and is part of the
 %  project: photoluminescence.
