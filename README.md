@@ -1,4 +1,4 @@
-photoreflectance
+photoluminescence
 ================
 
 Functions for extracting parameters from photoluminescence data.
@@ -83,5 +83,3 @@ are set. If the fit() is resulting in poor fits or is hitting boundaries, they s
 The fit() is then performed. Here the tolerance and number of iterations can be changed. Finally any plotting is
 performed.
 
-photoluminescence
-=================
