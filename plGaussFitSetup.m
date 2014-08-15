@@ -1,5 +1,5 @@
 function [start, upper, lower] = plGaussFitSetup(x, initial, myCoeff,...
-                                    varargin)
+                                     testc, testA)
 % plGaussFitSetup returns vectors describing initial conditions, as well as 
 % upper and lower bounds for the fitting function.
 %   Inputs:
@@ -21,14 +21,14 @@ function [start, upper, lower] = plGaussFitSetup(x, initial, myCoeff,...
 %  it under the terms of the GNU General Public License v3.
 %En=[1.12, 1.118, 1.154, 1.201, 1.267, 1.32, 1.346, 1.35, 1.362, 1.425];
 
-    erangeF=0.02;        %Value erange determines percentage change allowed    
+    erangeF=0.004;        %Value erange determines percentage change allowed    
     EnGplus=1+erangeF;   %via bounds for energy. E.g. 0.02 means 2% higher   
-    EnGminus=1-erangeF;  %or lower than the input guess.
+    EnGminus=1-erangeF;  %or lower than the input guess. 004 used for PR
     EnGmax=max(x)*0.999;
     EnGmin=min(x)*1.001;
 
     cGstart=10e-3;
-    cGup=80e-3;
+    cGup=25e-3;
     cGlow=1e-5;
 
     AGstart=5e-2;
@@ -57,24 +57,34 @@ function [start, upper, lower] = plGaussFitSetup(x, initial, myCoeff,...
                 else
                     EnGlow=initial(initialIndex)*EnGminus;
                 end
-                if initialIndex == length(initial)
-                    start(i)=initial(initialIndex);
-                    upper(i)=1.6;
-                    lower(i)=1.4;
-                else
+%                 if initialIndex == length(initial)
+%                     start(i)=initial(initialIndex);
+%                     upper(i)=1.6;
+%                     lower(i)=1.4;
+%                 else
                     start(i)=initial(initialIndex);
                     upper(i)=EnGup;
                     lower(i)=EnGlow;
-                end
-                initialIndex = initialIndex + 1;
+%                 end
+                
             case 'cG'
-                start(i)=cGstart;
+                if testc(initialIndex)==0
+                    start(i)=cGstart;
+                else
+                    start(i)=testc(initialIndex);
+                end
                 upper(i)=cGup;
                 lower(i)=cGlow;
             case 'AG'
+                if testA(initialIndex)==0
+                    start(i)=AGstart;
+                else
+                    start(i)=testA(initialIndex);
+                end
                 start(i)=AGstart;
                 upper(i)=AGup;
                 lower(i)=AGlow;
+                initialIndex = initialIndex + 1;
             % End setup ranges for prFDFF parameters
         end
     end

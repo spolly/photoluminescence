@@ -1,4 +1,4 @@
-function [myFit , myGof, myArea] = plGaussFit(x, y, initial, varargin)
+function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, initial, varargin)
 % plGaussFit returns a fit and a gof against the input x and y data, using 
 % the sum of n oscillators defined by plGauss.
 %   Inputs:
@@ -21,8 +21,10 @@ function [myFit , myGof, myArea] = plGaussFit(x, y, initial, varargin)
     p = inputParser;
     addOptional(p,'plotFitOnly','false');
     addOptional(p,'plotAll','true');
+    addOptional(p,'testc',0);
+    addOptional(p,'testA',0);
     parse(p,varargin{:});
-    
+
     n=length(initial);
     
     [myEq, myCoeff]=plGaussn(n);
@@ -30,7 +32,7 @@ function [myFit , myGof, myArea] = plGaussFit(x, y, initial, varargin)
     myFitType=fittype(myEq, 'dependent',{'y'},'independent',{'x'},...
     'coefficients', myCoeff);
 
-    [start,upper,lower]=plGaussFitSetup(x, initial, myCoeff);
+    [start,upper,lower]=plGaussFitSetup(x, initial, myCoeff, p.Results.testc, p.Results.testA);
 
     [myFit,myGof]=fit(x,y,myFitType,'StartPoint', start, 'Upper', upper,...
         'Lower', lower, 'MaxFunEvals', 5000, 'MaxIter', 5000,...
