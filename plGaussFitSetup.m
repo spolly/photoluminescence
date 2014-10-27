@@ -1,5 +1,4 @@
-function [start, upper, lower] = plGaussFitSetup(x, initial, myCoeff,...
-                                     testc, testA)
+function [start, upper, lower] = plGaussFitSetup(x, Eini, myCoeff, cini, Aini)
 % plGaussFitSetup returns vectors describing initial conditions, as well as 
 % upper and lower bounds for the fitting function.
 %   Inputs:
@@ -46,33 +45,33 @@ function [start, upper, lower] = plGaussFitSetup(x, initial, myCoeff,...
                 %First check to make sure the generatated bounds on the 
                 %guesses of energy are inside the data, if not set to just 
                 %inside the data range.
-                if initial(initialIndex)*EnGplus > EnGmax
+                if Eini(initialIndex)*EnGplus > EnGmax
                     EnGup=EnGmax;
                 else
-                    EnGup=initial(initialIndex)*EnGplus;
+                    EnGup=Eini(initialIndex)*EnGplus;
                 end
-                if initial(initialIndex)*EnGminus < EnGmin
+                if Eini(initialIndex)*EnGminus < EnGmin
                     EnGlow=EnGmin;
                 else
-                    EnGlow=initial(initialIndex)*EnGminus;
+                    EnGlow=Eini(initialIndex)*EnGminus;
                 end
-                    start(i)=initial(initialIndex);
-                    upper(i)=EnGup;
-                    lower(i)=EnGlow;                
+                start(i)=Eini(initialIndex);
+                upper(i)=EnGup;
+                lower(i)=EnGlow;                
             case 'cG'
-                if testc(initialIndex)==0
+              if isnan(cini(initialIndex))
                     start(i)=cGstart;
-                else
-                    start(i)=testc(initialIndex);
-                end
+              else
+                    start(i)=cini(initialIndex);
+              end
                 upper(i)=cGup;
                 lower(i)=cGlow;
             case 'AG'
-                if testA(initialIndex)==0
+               if isnan(Aini(initialIndex))
                     start(i)=AGstart;
-                else
-                    start(i)=testA(initialIndex);
-                end
+               else
+                   start(i)=Aini(initialIndex);
+               end
                 start(i)=AGstart;
                 upper(i)=AGup;
                 lower(i)=AGlow;
