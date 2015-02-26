@@ -19,19 +19,28 @@ function [start, upper, lower] = plGaussFitSetup(x, Eini, myCoeff, cini, Aini)
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License v3.
 
-    erangeF=0.004;       %Value erange determines percentage change allowed    
-    EnGplus=1+erangeF;   %via bounds for energy. E.g. 0.02 means 2% higher   
-    EnGminus=1-erangeF;  %or lower than the input guess. 004 used for PR
-    EnGmax=max(x)*0.999;
+%=====User editable to change functionality and range======================
+    %Value erange determines percentage change allowed
+    %via bounds for energy. E.g. 0.02 means 2% higher
+    %or lower than the input guess. 0.004 used for PR
+    %see https://github.com/spolly/photoreflectance
+    erangeF=0.004; %[eV]          
+    
+    %Boundary conditions
+    cGstart=10e-3;  %Half-width half-max (HWHM) starting point [eV]
+    cGup=25e-3;     %HWHM maximum [eV]
+    cGlow=1e-5;     %HWHM minimum [eV]
+
+    AGstart=5e-2;   %Amplitude starting point [arb.]
+    AGup=1e2;       %Amplitude maximum [arb.]
+    AGlow=1e-8;     %Amplitude minimum [arb.]
+    
+%==========================================================================
+    
+    EnGplus=1+erangeF;     
+    EnGminus=1-erangeF;  
+    EnGmax=max(x)*0.999; 
     EnGmin=min(x)*1.001;
-
-    cGstart=10e-3;  %Half-width half-max (HWHM) starting point
-    cGup=25e-3;     %HWHM maximum
-    cGlow=1e-5;     %HWHM minimum
-
-    AGstart=5e-2;   %Amplitude starting point
-    AGup=1e2;       %Amplitude maximum
-    AGlow=1e-8;     %Amplitude minimum
 
     cLength=length(myCoeff);
     start(cLength)=zeros;

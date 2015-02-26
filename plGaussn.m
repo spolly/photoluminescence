@@ -1,9 +1,9 @@
 function [myEq,myCoeff]=plGaussn(n)
-% plGaussn builds a string defining the sum of (n) oscillators of the
-% equation presented in plGauss.m, as well as a vector of corrisponding 
+% plGaussn builds a string defining the sum of (n) Gaussian functions of 
+% the equation presented in plGauss.m, as well as a vector of corrisponding 
 % coefficient names.
 %   Inputs:
-%       n: Number of oscillators to use [unitless] {scalar expected}
+%       n: Number of Gaussians to use [unitless] {scalar expected}
 %   Outputs:
 %       myEq: Equation to use in building a fittype {string}
 %       myCoeff: List of parameter names used in myEq {vector}

@@ -1,4 +1,4 @@
-function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, Eini, varargin)
+function [myFit, myGof, myArea, myGauss] = plGaussFit(x, y, Eini, varargin)
 % plGaussFit returns the MATLAB structs fitobject, goodness of fit,  and
 % the numerically integrated (trapezoidal method) area of each Gaussian
 % testArea and the output of the call to plGauss.m with the results of each
@@ -54,24 +54,23 @@ function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, Eini, varargin)
         set(myPlot,'LineWidth', 3);
         fitCoeff=coeffvalues(myFit);
         fitCoeffNames=coeffnames(myFit);
-        G_iter=1;
         myGauss=zeros(length(x), n);
+        myArea(n)=zeros;
         for j=1:n
-             myName=strcat('EnG',num2str(G_iter,'%02d'));
+             myName=strcat('EnG',num2str(j,'%02d'));
              boolIndex = strcmp(myName, fitCoeffNames);
              myEnG=fitCoeff(boolIndex);
 
-             myName=strcat('cG',num2str(G_iter,'%02d'));
+             myName=strcat('cG',num2str(j,'%02d'));
              boolIndex = strcmp(myName, fitCoeffNames);
              mycG=fitCoeff(boolIndex);
 
-             myName=strcat('AG',num2str(G_iter,'%02d'));
+             myName=strcat('AG',num2str(j,'%02d'));
              boolIndex = strcmp(myName, fitCoeffNames);
              myAG=fitCoeff(boolIndex);
 
-             myGauss(:,G_iter)=plGauss(x, myEnG, mycG, myAG);
-             myArea(:,G_iter)=trapz(plGauss(x, myEnG, mycG, myAG));
-             G_iter = G_iter + 1;
+             myGauss(:,j)=plGauss(x, myEnG, mycG, myAG);
+             myArea(j)=trapz(plGauss(x, myEnG, mycG, myAG));
          end
          hold on
          plot(x,myGauss, 'linewidth', 1);
