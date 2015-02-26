@@ -26,7 +26,6 @@ How to use these scripts
 ------------------------
 
 ###To produce an example Gaussian plot
-####Third derivative functional form (TDFF)
 Files needed:
 * `plGauss.m`  
 
@@ -81,5 +80,5 @@ The fitting process flow is as follows:
 It then creates a fittype, followed by a call to `plGaussFitSetup.m` where the starting point, and upper and lower bounds
 are set. If the fit() is resulting in poor fits or is hitting boundaries, they should be changed within the setup file.
 The fit() is then performed. Here the tolerance and number of iterations can be changed. Finally any plotting is
-performed.
+performed. Outputs are the MATLAB structs fitobject as `testFit` and goodness of fit `testGOF` as well as the numerically integrated (trapezoidal method) area of each Gaussian `testArea` and the output of the call to `plGauss.m` with the results of each component Gaussian in `testGauss` so they can easily be plotted or copied to another program.
 
