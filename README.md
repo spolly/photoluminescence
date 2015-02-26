@@ -30,10 +30,10 @@ Files needed:
 * `plGauss.m`  
 
 For, e.g. GaAs:  
-First create a vector of energies to plot over, here 1.3 to 1.5 eV in steps of 1 meV:
+First create a column vector of energies to plot over, here 1.3 to 1.5 eV in steps of 1 meV:
 
 ```matlab
-E= 1.3 : 0.001 : 1.5;
+E = (1.3 : 0.001 : 1.5)';
 ```
 
 Then calculate the corresponding PL signal with a call to `plGauss.m`. In this example:
