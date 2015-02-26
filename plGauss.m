@@ -1,5 +1,5 @@
 function f = plGauss(x, En, c, A)
-% plGauss returns the a Gaussian lineshape.
+% plGauss returns a Gaussian function.
 %   Inputs:
 %        x: Energy [eV] {vector expected}
 %       En: Oscillator energy [eV] {scalar expected}
