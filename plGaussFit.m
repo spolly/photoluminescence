@@ -1,5 +1,9 @@
 function [myFit , myGof, myArea, myGauss] = plGaussFit(x, y, Eini, varargin)
-% plGaussFit returns a fit and a gof against the input x and y data, using 
+% plGaussFit returns the MATLAB structs fitobject, goodness of fit,  and
+% the numerically integrated (trapezoidal method) area of each Gaussian
+% testArea and the output of the call to plGauss.m with the results of each
+% component Gaussian in testGauss so they can easily be plotted or copied 
+% to another program, against the input x and y data, using 
 % the sum of n oscillators defined by plGauss.
 %   Inputs:
 %       x: x-values of experimental data (energy) [eV] {vector expected}
